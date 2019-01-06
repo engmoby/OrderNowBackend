@@ -1,0 +1,55 @@
+<div >
+	<div style="margin-bottom:10px">
+		<button ng-disabled="SupervisorCtrl.Supervisors.totalCount == SupervisorCtrl.SupervisorsLimit"  ng-click="SupervisorCtrl.openSupervisorDialog()" class="btn pmd-ripple-effect btn-primary pmd-z-depth" type="button">{{'AddSupervisorBtn' | translate}}</button>
+	</div>
+	<div ng-if="SupervisorCtrl.Supervisors.results.length == 0">
+		<span>{{'NoSupervisorAvailable' | translate}}</span>
+	</div>
+	<!-- <span>
+		{{SupervisorCtrl.Supervisors.totalCount}} / {{SupervisorCtrl.SupervisorsLimit}} ({{'consumedAndTotal' | translate}})
+	</span> -->
+	
+	<div class="pmd-card pmd-z-depth pmd-card-custom-view" ng-if="SupervisorCtrl.Supervisors.results.length > 0">
+		<div class="table-responsive">
+			<table class="table pmd-table table-hover">
+				<thead>
+					<tr>
+						<th >{{'Name' | translate}}</th>
+						<th >{{'UserName' | translate}}</th>
+						<th >{{'Branch' | translate}}</th>
+						<!-- <th >{{'startDatelbl' | translate}}</th>
+						<th >{{'endDatelbl' | translate}}</th> -->
+						
+						<th ></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="Supervisor in SupervisorCtrl.Supervisors.results">
+						<td data-title="Name" width="30%">{{Supervisor.name}}</td>
+						<td>
+                            {{Supervisor.userName}}
+						</td>
+						<td>
+                            {{Supervisor.branchTitleDictionary[selectedLanguage]}}
+						</td>
+						<!-- <td>
+                            {{Supervisor.start}}
+						</td>
+						<td>
+                            {{Supervisor.end}}
+						</td> -->
+						<td >
+							<i class="material-icons md-dark pmd-md cursorPointer font25" ng-click="SupervisorCtrl.openEditSupervisorDialog($index)">mode_edit</i> 
+							<i class="material-icons pmd-md deleteButton cursorPointer font25" ng-click="SupervisorCtrl.openDeleteSupervisorDialog(Supervisor.userName,Supervisor.userId)">delete</i>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="text-align:center;" paging page="1" page-size="10" total="SupervisorCtrl.Supervisors.totalCount" paging-action="SupervisorCtrl.changePage( page)"
+		flex="nogrow" show-prev-next="true" show-first-last="true" hide-if-empty="true" disabled-class="hide">
+		   </div>
+	</div> 
+
+
+</div>					

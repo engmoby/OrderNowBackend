@@ -1,0 +1,432 @@
+<style>
+    .my-custom-stars .button .material-icons {
+        font-size: 20px;
+    }
+
+    .my-custom-stars .star-button.star-on .material-icons {
+        color: #003399;
+    }
+
+    .my-custom-stars .star-button.star-off .material-icons {
+        color: #99ccff;
+    }
+
+    .my-custom-stars .button .material-icons a:focus,
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $('#fromdate').datetimepicker(
+            {
+                format: 'DD/MM/YYYY',
+                // minDate: new Date()
+            }
+        );
+        $('#todate').datetimepicker(
+            {
+                format: 'DD/MM/YYYY',
+                // minDate: new Date(),
+                useCurrent: false
+            }
+        );
+        $("#fromdate").on("dp.change", function (e) {
+            $('#todate').data("DateTimePicker").minDate(e.date);
+        });
+        // Start date picke on chagne event [select maxmimum date for start date datepicker]
+        $("#todate").on("dp.change", function (e) {
+            $('#fromdate').data("DateTimePicker").maxDate(e.date);
+        });
+
+
+
+
+        $('#fromdateSurvey').datetimepicker(
+            {
+                format: 'DD/MM/YYYY',
+                // minDate: new Date()
+            }
+        );
+        $('#todateSurvey').datetimepicker(
+            {
+                format: 'DD/MM/YYYY',
+                // minDate: new Date(),
+                useCurrent: false
+            }
+        );
+        $("#fromdateSurvey").on("dp.change", function (e) {
+            $('#todateSurvey').data("DateTimePicker").minDate(e.date);
+        });
+        // Start date picke on chagne event [select maxmimum date for start date datepicker]
+        $("#todateSurvey").on("dp.change", function (e) {
+            $('#fromdateSurvey').data("DateTimePicker").maxDate(e.date);
+        });
+    });
+
+</script>
+
+<div class="container-fluid">
+    <div class="row" id="card-masonry">
+        <div class="col-lg-4">
+            <div class="pmd-card pmd-z-depth">
+                <div class="pmd-card-title">
+                    <div style="background-color:violet ;margin-bottom: 16px;">
+                        <div class="row">
+                            <div class="col-xs-4" style="width: 23.333333% !important;">
+                                <i class="fa fa-user fa-5x" style="font-size: 3em !important; margin-left: 10px;"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Pending </span>
+                                <h2 class="font-bold" ng-cloack>
+                                    {{dashboardCtrl.orderCounts[0].pendingCount}}
+
+                                </h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="pmd-card pmd-z-depth">
+                <div class="pmd-card-title">
+                    <div style="background-color: salmon ;margin-bottom: 16px;">
+                        <div class="row">
+                            <div class="col-xs-4" style="width: 23.333333% !important;">
+
+                                <i class="fa fa-envelope-o fa-5x" style="font-size: 3em !important; margin-left: 10px;"></i>
+
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Approved </span>
+                                <h2 class="font-bold" ng-cloack>
+                                    {{dashboardCtrl.orderCounts[0].approvedCount}}
+
+                                </h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="pmd-card pmd-z-depth">
+                <div class="pmd-card-title">
+                    <div style="background-color:greenyellow ;margin-bottom: 16px;">
+                        <div class="row">
+                            <div class="col-xs-4" style="width: 23.333333% !important;">
+
+                                <i class="fa fa-cloud fa-5x" style="font-size: 3em !important; margin-left: 10px;"></i>
+                            </div>
+                            <div class="col-xs-8 text-right">
+                                <span> Rejected </span>
+                                <h2 class="font-bold" ng-cloack>
+                                    {{dashboardCtrl.orderCounts[0].rejectedCount}}
+
+                                </h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row" id="card-masonry">
+        <div class="col-lg-4">
+            <div class="pmd-card pmd-z-depth">
+                <div class="pmd-card-title">
+                    <div class="media-left">
+                        <div style="cursor: pointer; ">
+                            <h1 style="padding: 4px" ng-init="showRequest = true" ng-click="showRequest=!showRequest">
+                                {{'bestSeller' | translate}}
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="form-group has-feedback transition" ng-repeat='item in dashboardCtrl.ItemCount | limitTo :5'>
+                        <img ng-src="{{item.imageUrl}}" style="max-height: 200px;max-width: 64px;" /></td>
+                        <span>{{item.titleDictionary[selectedLanguage]}}</span>
+                        <span style=" float: right;">{{item.count}}</span>
+                        <!-- <i class="fa fa-bars form-control-feedback"></i> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="pmd-card pmd-z-depth">
+                <div class="pmd-card-title">
+                    <div class="row" id="card-masonry">
+                        <div class="col-xs-12">
+                            <div class="media-left">
+                                <div style="cursor: pointer; ">
+                                    <h1 style="padding: 4px" ng-init="showRequest = true" ng-click="showRequest=!showRequest">
+                                        {{'recentorders' | translate}}
+                                    </h1>
+                                </div>
+                            </div>
+                            <table class="table table-mc-red pmd-table">
+                                <thead>
+                                    <tr>
+                                        <th>{{'TableName' | translate}}</th>
+                                        <th>{{'CreateTime' | translate}}</th>
+                                        <th>{{'StatusLbl' | translate}}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat-start="request in dashboardCtrl.requests.results" ng-style="{'background-color': request.status=='Pending'?'#f5f58a':''}">
+                                        <td data-title="Name">{{request.tableName}}</td>
+                                        <td data-title="Name">{{request.createTime}}</td>
+                                        <td data-title="Name">{{request.status|translate}} <span ng-if="request.status!='Pending'">
+                                                {{request.modifier}} {{request.modifyTime}}</span> </td>
+
+
+                                        <td class="pmd-table-row-action">
+                                            <span href="javascript:void(0);" ng-if="request.requestDetails.length >0 || request.comment !== null || request.requestTime !== null"
+                                                ng-click="request.show=!request.show;dashboardCtrl.showMore($event)"
+                                                class="btn pmd-btn-fab pmd-btn-flat pmd-ripple-effect btn-default btn-sm child-table-expand direct-expand"><i
+                                                    class="material-icons md-dark pmd-sm"></i></span>
+                                        </td>
+                                    </tr>
+                                    <tr ng-repeat-end class="child-table" ng-show="request.show">
+                                        <td colspan="12">
+                                            <div class="direct-child-table" ng-if="request.requestDetails.length >0">
+                                                <table class="table pmd-table table-striped table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th ng-if="request.type=='Normal'">{{'DescriptionLbl' |
+                                                                translate}}</th>
+                                                            <th ng-if="request.type=='Restaurant'">{{'itemlbl' |
+                                                                translate}}</th>
+                                                            <th>{{'NumberLbl' | translate}}</th>
+                                                            <th>{{'priceLbl' |translate}}</th>
+                                                            <th>{{'totalpriceLbl'|translate}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="requestDetail in request.requestDetails">
+                                                            <td>{{requestDetail.descriptionDictionary[selectedLanguage]}}
+                                                                <div ng-show="requestDetail.from != null">{{'from'|translate}}:
+                                                                    {{requestDetail.from}}</div>
+
+                                                                <div ng-show="requestDetail.to != null">{{'to'|translate}}:
+                                                                    {{requestDetail.to}}
+                                                                </div>
+                                                            </td>
+                                                            <td>{{requestDetail.number}}</td>
+                                                            <td>
+                                                                <span ng-if="requestDetail.price <= 0">{{'freelbl'
+                                                                    |translate}}</span>
+                                                                <span ng-if="requestDetail.price > 0">{{requestDetail.price}}</span>
+                                                            </td>
+                                                            <td>
+                                                                <span ng-if="requestDetail.price <= 0">{{'freelbl'
+                                                                    |translate}}</span>
+                                                                <span ng-if="requestDetail.price > 0">{{requestDetail.price
+                                                                    *
+                                                                    requestDetail.number}} </span>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div style="background: white;padding: 5px;" ng-if="request.comment !== null">
+                                                <h2>{{'Comment'|translate}}: </h2>
+                                                <span>{{request.comment}}</span>
+                                            </div>
+                                            <div style="background: white;padding: 5px;" ng-if="request.requestTime !== null">
+                                                <!-- <h2 style="float: left;">{{'Time'|translate}}: </h2> -->
+                                                <h2>{{'Time'|translate}}: </h2>
+                                                <span> {{request.requestTime}}</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- <div class="pmd-card pmd-z-depth">
+                <div class="pmd-card-title">
+                    <div class="row" id="card-masonry">
+                        <div class="col-xs-12">
+                            <div class="media-left">
+                                <div style="cursor: pointer; ">
+                                    <h1 style="padding: 4px" ng-init="showRequest = true" ng-click="showRequest=!showRequest">
+                                        {{'recentitem' | translate}}
+                                    </h1>
+                                </div>
+                            </div>
+                            <table class="table pmd-table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>{{'Name' | translate}}</th>
+                                        <th>{{'Imagelbl' | translate}}</th>
+                                        <th>{{'DescriptionLbl' | translate}}</th>
+                                        <th>{{'size' | translate}}</th>
+                                        <th>{{'status' | translate}}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in dashboardCtrl.items.results">
+                                        <td data-title="Name" width="15%">{{item.itemNameDictionary[selectedLanguage] |
+                                            limitTo:10}}</td>
+                                        <td data-title="Image"><img ng-src="{{item.imageURL}}?type='thumbnail'&date={{dashboardCtrl.Now}}"
+                                                ng-alt="{{item.itemName}}" style="max-height: 200px;max-width: 200px;" /></td>
+                                        <td data-title="Description">{{item.itemDescriptionDictionary[selectedLanguage]
+                                            | limitTo:50}}</td>
+                                        <td data-title="Description" width="5%">{{item.price}}</td>                          
+                                        <td data-title="Size" width="10%">
+                                            <div ng-init="sizeLimit=2">
+                                                <span ng-repeat="size in item.sizes|limitTo:sizeLimit">
+                                                    {{size.sizeNameDictionary[selectedLanguage]}} <span>{{size.price}}</span><span
+                                                        ng-if="!$last">,</span>
+                                                </span>
+                                                <div class="cursorPointer font12" ng-show="item.sizes.length > 2">
+                                                    <span ng-show="sizeLimit == 2" ng-click="sizeLimit=item.sizes.length">{{item.sizes.length
+                                                        -2}} more size</span>
+                                                    <span ng-show="sizeLimit != 2" ng-click="sizeLimit=2">Collapse</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <input type="checkbox" ng-model="item.isActive" name="name">
+
+                                        </td>
+                                        <td width="10%">
+                                           <i class="material-icons md-dark pmd-md cursorPointer font25" ng-click="$state.go('editItem',{categoryId:item.categoryId,itemId:item.itemID});">mode_edit</i>
+                                            <i class="material-icons pmd-md deleteButton cursorPointer font25" ng-click="dashboardCtrl.openDeleteItemDialog(item.itemName,item.itemID)">delete</i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div> -->
+        </div>
+
+    </div>
+</div>
+<div class="container-fluid" ng-init="showMoreFilter = false">
+    <div class="row" id="card-masonry">
+        <!-- Today's Site Activity -->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="pmd-card pmd-z-depth">
+                <div class="pmd-card-title">
+                    <div class="media-left">
+                        <div style="cursor: pointer; ">
+                            <h1 style="padding: 4px" ng-init="showRequest = true" ng-click="showRequest=!showRequest">
+                                {{'Requests' | translate}}
+                            </h1>
+                        </div>
+                    </div>
+
+                    <div class="pmd-card-body" ng-show="showRequest" ng-init="showMoreFilter = false">
+                        <div class="row">
+
+                            <div style="direction: ltr;" class="col-md-2 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed">
+                                <label>{{'fromLbl' | translate}}</label>
+                                <input type="text" id="fromdate" class="form-control" required />
+                            </div>
+
+                            <div style="direction: ltr;" class="col-md-2 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed">
+                                <label>{{'toLbl' | translate}}</label>
+                                <input type="text" id="todate" class="form-control" required />
+                            </div>
+                            <!-- <div class="col-md-4 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed" <label
+                                    for="first-name">{{'StatusLbl' | translate}}</label>
+                                    <select class="form-control select-with-search pmd-select2-tags" ng-model="dashboardCtrl.selectedStatus">
+                                        <option value="">{{'AllLbl' | translate}}</option>
+                                        <option value="Pending">{{'Pending'|translate}}</option>
+                                        <option value="Assigned">{{'Assigned'|translate}}</option>
+                                        <option value="InProgress">{{'InProgress'|translate}}</option>
+                                        <option value="Closed">{{'Closed'|translate}}</option>
+                                        <option value="Rejected">{{'Rejected'|translate}}</option>
+                                    </select>
+                                </div> -->
+                        </div>
+                        <div class="row" ng-show="showMoreFilter">
+                            <div class="col-md-4 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed"
+                                <label for="first-name">{{'Country' | translate}}</label>
+                                <select class="form-control select-with-search pmd-select2-tags" ng-change="dashboardCtrl.countryChange()"
+                                    ng-model="dashboardCtrl.selectedCountry" ng-options="group as group.titleDictionary[selectedLanguage] for group in dashboardCtrl.counties">
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed"
+                                <label for="first-name">{{'Region' | translate}}</label>
+                                <select class="form-control select-with-search pmd-select2-tags" ng-change="dashboardCtrl.regionChange()"
+                                    ng-model="dashboardCtrl.selectedRegion" ng-options="group as group.titleDictionary[selectedLanguage] for group in dashboardCtrl.regions">
+                                </select>
+                            </div>
+                            <div class="col-md-4 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed"
+                                <label for="first-name">{{'City' | translate}}</label>
+                                <select class="form-control select-with-search pmd-select2-tags" ng-change="dashboardCtrl.cityChange()"
+                                    ng-model="dashboardCtrl.selectedCity" ng-options="group as group.titleDictionary[selectedLanguage] for group in dashboardCtrl.cities">
+                                </select>
+                            </div>
+                            <div class="col-md-2 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed">
+                                <label for="first-name">{{'Area' | translate}}</label>
+
+                                <select required class="form-control select-with-search pmd-select2-tags" ng-change="dashboardCtrl.areaChange()"
+                                    ng-model="dashboardCtrl.selectedArea" ng-options="a as a.titleDictionary[selectedLanguage] for a in dashboardCtrl.areaList"></select>
+                            </div>
+
+                            <div class="col-md-2 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed">
+                                <label for="first-name">{{'Branch' | translate}}</label>
+
+                                <select required class="form-control select-with-search pmd-select2-tags" ng-model="dashboardCtrl.selectedBranch"
+                                    ng-options="a as a.titleDictionary[selectedLanguage] for a in dashboardCtrl.branchList"></select>
+                            </div>
+
+
+                        </div>
+                        <div class="row" style="padding-bottom: 5px;">
+                            <div class="col-md-2 ">
+                                <button ng-click="dashboardCtrl.applyFilter()" class="btn pmd-ripple-effect btn-primary pmd-z-depth"
+                                    type="button">{{'filterBtn' | translate}}</button>
+                            </div>
+                            <span ng-show="!showMoreFilter" ng-click="showMoreFilter = !showMoreFilter" style="cursor: pointer">{{'moreFilter'|translate}}</span>
+                            <span ng-show="showMoreFilter" ng-click="showMoreFilter = !showMoreFilter" style="cursor: pointer">{{'lessFilter'|translate}}</span>
+                        </div>
+                        <div class="form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed">
+                            <label for="first-name">{{'ViewBy' | translate}}</label>
+                            <select style="width:15% !important" class="select-tags form-control pmd-select2-tags"
+                                ng-change="dashboardCtrl.requestFilterChange()" ng-model="dashboardCtrl.selectedRequestFilter"
+                                ng-options="f.value as f.name for f  in dashboardCtrl.requestsFilter">
+                            </select>
+                        </div>
+                        <nvd3 style="direction: ltr" options="dashboardCtrl.options" data="dashboardCtrl.data"></nvd3>
+                    
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

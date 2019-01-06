@@ -1,0 +1,90 @@
+<div class="modal-content">
+        <div class="modal-header bordered">
+            <button class="close" type="button" ng-click="editSupervisorDlCtrl.close()">×</button>
+            <h2 class="pmd-card-title-text">{{'UpdateSupervisorLbl' | translate}}</h2>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal" name="newSupervisorForm">
+                <div class="form-group pmd-textfield pmd-textfield-floating-label  pmd-textfield-floating-label-completed">
+                    <label for="first-name">{{'UserName' | translate}}</label>
+                    <input required type="text" class="mat-input form-control" name="userName" ng-model="editSupervisorDlCtrl.Supervisor.userName" ng-minlength="3" ng-maxlength="100">
+                    <div ng-messages="newSupervisorForm.userName.$error" >
+                        <div ng-if="newSupervisorForm.userName.$error.required && !newSupervisorForm.userName.$pristine">{{'requiredErr' | translate}}</div>
+                        <div ng-if="(newSupervisorForm.userName.$error.minlength || newSupervisorForm.userName.$error.maxlength) && !newSupervisorForm.userName.$error.required">{{'NameLengthError' | translate}}</div>
+                    </div>
+                </div>
+                <div class="form-group pmd-textfield pmd-textfield-floating-label  pmd-textfield-floating-label-completed">
+                    <label for="first-name">{{'Name' | translate}}</label>
+                    <input required type="text" class="mat-input form-control" name="name" ng-model="editSupervisorDlCtrl.Supervisor.name" ng-minlength="3" ng-maxlength="100">
+                    <div ng-messages="newSupervisorForm.name.$error" >
+                        <div ng-if="newSupervisorForm.name.$error.required && !newSupervisorForm.name.$pristine">{{'requiredErr' | translate}}</div>
+                        <div ng-if="(newSupervisorForm.name.$error.minlength || newSupervisorForm.name.$error.maxlength) && !newSupervisorForm.name.$error.required">{{'NameLengthError' | translate}}</div>
+                    </div>
+                </div>
+                <div class="form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed" >
+                        <label for="first-name">{{'SupervisorUserPasswordLbl' | translate}}</label>
+                        <input required type="password" class="mat-input form-control" name="password" ng-model="editSupervisorDlCtrl.Supervisor.password" ng-minlength="8" ng-maxlength="25">
+                        <div ng-messages="newSupervisorForm.password.$error" >
+                            <div ng-if="newSupervisorForm.password.$error.required && !newSupervisorForm.password.$pristine">{{'requiredErr' | translate}}</div>
+                            <div ng-if="(newSupervisorForm.password.$error.minlength || newSupervisorForm.password.$error.maxlength) && !newSupervisorForm.password.newPassword.$error.required">Password length must be 8-25 char.</div>
+                        </div>
+                    </div>
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed" >
+                        <label for="first-name">{{'ConfirmPasswordLbl' | translate}}</label>
+                        <input required type="password" class="mat-input form-control" name="confirmPassword"  ng-model="editSupervisorDlCtrl.Supervisor.confirmPassword" equalto="newSupervisorForm.password" >
+                        <div ng-messages="newSupervisorForm.confirmPassword.$error" >
+                            <div ng-if="newSupervisorForm.confirmPassword.$error.required && !newSupervisorForm.confirmPassword.$pristine">{{'requiredErr' | translate}}</div>
+                            <div ng-if="newSupervisorForm.confirmPassword.$error.equalto && !newSupervisorForm.confirmPassword.$error.required">Passwords don't match.</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed"
+                            <label for="first-name">{{'Country' | translate}}</label>
+                            <select class="form-control select-with-search pmd-select2-tags" ng-change="editSupervisorDlCtrl.countryChange()"
+                                ng-model="editSupervisorDlCtrl.selectedCountry" ng-options="group as group.titleDictionary[editSupervisorDlCtrl.selectedLanguage] for group in editSupervisorDlCtrl.counties">
+                            </select>
+                        </div>
+                        <div class="col-md-4 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed"
+                            <label for="first-name">{{'Region' | translate}}</label>
+                            <select class="form-control select-with-search pmd-select2-tags" ng-change="editSupervisorDlCtrl.regionChange()"
+                                ng-model="editSupervisorDlCtrl.selectedRegion" ng-options="group as group.titleDictionary[editSupervisorDlCtrl.selectedLanguage] for group in editSupervisorDlCtrl.regions">
+                            </select>
+                        </div>
+                        <div class="col-md-4 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed"
+                            <label for="first-name">{{'City' | translate}}</label>
+                            <select class="form-control select-with-search pmd-select2-tags" ng-change="editSupervisorDlCtrl.cityChange()"
+                                ng-model="editSupervisorDlCtrl.selectedCity" ng-options="group as group.titleDictionary[editSupervisorDlCtrl.selectedLanguage] for group in editSupervisorDlCtrl.cities">
+                            </select>
+                        </div>
+                        <div class="col-md-2 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed">
+                            <label for="first-name">{{'Area' | translate}}</label>
+        
+                            <select required class="form-control select-with-search pmd-select2-tags" ng-change="editSupervisorDlCtrl.areaChange()"
+                                ng-model="editSupervisorDlCtrl.selectedArea" ng-options="a as a.titleDictionary[editSupervisorDlCtrl.selectedLanguage] for a in editSupervisorDlCtrl.areaList"></select>
+                        </div>
+        
+                        <div class="col-md-2 form-group pmd-textfield pmd-textfield-floating-label pmd-textfield-floating-label-completed">
+                            <label for="first-name">{{'Branch' | translate}}</label>
+        
+                            <select required class="form-control select-with-search pmd-select2-tags" ng-model="editSupervisorDlCtrl.selectedBranch"
+                                ng-options="a as a.titleDictionary[editSupervisorDlCtrl.selectedLanguage] for a in editSupervisorDlCtrl.branchList"></select>
+                        </div>
+        
+                    </div>
+                      <!-- <div >
+                        <select required class="select-simple form-control pmd-select2" 
+                            ng-options="item.branchTitleDictionary[editSupervisorDlCtrl.selectedLanguage] for item in editSupervisorDlCtrl.Branches"  
+                            ng-model="editSupervisorDlCtrl.selectedBranch">
+                        </select>
+                        <div ng-if="editSupervisorDlCtrl.Branches.length <=0">{{'NoBranchAvailable' | translate}} </div>
+                    </div> -->
+            </form>
+        </div>
+        <div class="pmd-modal-action text-right">
+            <button ng-disabled="newSupervisorForm.$invalid" class="btn pmd-ripple-effect btn-primary" type="button" ng-click="editSupervisorDlCtrl.updateSupervisor()">{{'saveChangesBtn' | translate}}</button>
+            <button class="btn pmd-ripple-effect btn-default" type="button" ng-click="editSupervisorDlCtrl.close()">{{'DiscardBtn' | translate}}</button>
+        </div>
+    </div>
+    
+        
+    

@@ -1,0 +1,32 @@
+<div ncy-breadcrumb></div>  
+<div class="modal-content">
+	<div class="modal-header bordered">
+		<h2 class="pmd-card-title-text">{{'Table' | translate}}</h2> 
+    </div>
+	<div class="modal-body">
+	<form class="form-horizontal" name="editTypeForm"> 
+                <div> 
+                    <div class="form-group pmd-textfield pmd-textfield-floating-label-completed">
+                        <label for="first-name"> {{ 'Name' | translate}} </label>
+                        <input required Table="text" class="mat-input form-control" name="tableName" ng-model="editTableCtrl.Table.tableName"
+                            ng-minlength="3" ng-maxlength="255">
+                        <div ng-messages="editTypeForm.tableName.$error">
+    
+                            <div ng-show="editTypeForm.tableName.$error.required && !editTypeForm.tableName.$pristine">{{'requiredErr'
+                                | translate}}</div>
+                            <div ng-show="(editTypeForm.tableName.$error.minlength || editTypeForm.tableName.$error.maxlength) && !editTypeForm.tableName.$error.required">{{'NameLengthError255'
+                                | translate}}</div>
+                        </div>
+                    </div>
+ 
+                </div> 
+ 
+		</form>
+	</div>
+	<div class="pmd-modal-action text-right">
+		<button ng-disabled="editTypeForm.$invalid" class="btn pmd-ripple-effect btn-primary" type="button" ng-click="editTableCtrl.UpdateTable()">{{'saveChangesBtn' | translate}}</button>
+		<button class="btn pmd-ripple-effect btn-default" type="button" ng-click="editTableCtrl.close()">{{'DiscardBtn' | translate}}</button>
+	</div>
+</div>
+
+	
